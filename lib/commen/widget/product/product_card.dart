@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mechinetest/commen/shapes/container/rounded_container.dart';
 import 'package:mechinetest/commen/text/product_card_text.dart';
-import 'package:mechinetest/utils/constants/image_strings.dart';
+import 'package:mechinetest/features/models/product/product_list_model.dart';
 import 'package:mechinetest/utils/helper/device_helper.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
+    required this.product,
   });
-
+  final ProductList product;
   @override
   Widget build(BuildContext context) {
     return CRoundedContainer(
@@ -37,14 +38,14 @@ class ProductCard extends StatelessWidget {
           //* image
           Align(
             alignment: Alignment.topCenter,
-            child: Image.asset(
+            child: Image.network(
               // width: CHelperFuntions.screenWidth() * .2,
               height: CHelperFuntions.screenHeight() * .11,
-              CIMages.catDiary,
+              'http://143.198.61.94:8000${product.image}',
               fit: BoxFit.cover,
             ),
           ),
-          const ProductText()
+          ProductText(product: product)
         ],
       ),
     );

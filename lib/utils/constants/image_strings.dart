@@ -15,6 +15,8 @@ class CIMages {
   static const String catVeg = 'assets/images/categories/veg.png';
 
   //* Discover
-
   static const String disMeat = 'assets/images/discover/redmeat.png';
+
+  //* Icons
+  static const String iconWhatsapp = 'assets/images/icons/whatsapp.png';
 }

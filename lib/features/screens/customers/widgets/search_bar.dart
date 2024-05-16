@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:mechinetest/commen/shapes/container/circular_container.dart';
 import 'package:mechinetest/utils/constants/colors.dart';
 import 'package:mechinetest/utils/constants/sizes.dart';
 import 'package:mechinetest/utils/device/device_util.dart';
 
-class CSearchContainer extends StatelessWidget {
-  const CSearchContainer({
+class CCustomerSearchContainer extends StatelessWidget {
+  const CCustomerSearchContainer({
     super.key,
     required this.text,
     this.icon = Iconsax.search_normal,
@@ -45,19 +46,45 @@ class CSearchContainer extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
               border: showBorder ? Border.all(color: CColors.greyColor) : null),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(
-                icon,
-                color: CColors.darkerGreyColor,
+              Row(
+                children: [
+                  Icon(
+                    icon,
+                    color: CColors.darkerGreyColor,
+                  ),
+                  const SizedBox(
+                    width: CSizes.spaceBtwItem,
+                  ),
+                  Text(
+                    text,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
               ),
-              const SizedBox(
-                width: CSizes.spaceBtwItem,
+              const Row(
+                children: [
+                  Icon(
+                    Icons.qr_code,
+                    color: CColors.darkerGreyColor,
+                  ),
+                  SizedBox(
+                    width: CSizes.spaceBtwItem,
+                  ),
+                  CCircularContainer(
+                    height: 28,
+                    radius: 28,
+                    width: 28,
+                    backgroundColor: Color.fromARGB(255, 16, 142, 20),
+                    isGradient: true,
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                text,
-                style: Theme.of(context).textTheme.bodySmall,
-              ), 
-              
             ],
           ),
         ),

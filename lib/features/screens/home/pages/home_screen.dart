@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mechinetest/commen/layout/grid_layout.dart';
 import 'package:mechinetest/commen/shapes/container/search_container.dart';
+import 'package:mechinetest/commen/shimmer/product_shimmer.dart';
 import 'package:mechinetest/commen/text/section_heading.dart';
 import 'package:mechinetest/commen/widget/appbar/custom_appbar.dart';
 import 'package:mechinetest/commen/widget/product/product_card.dart';
+import 'package:mechinetest/features/controllers/home_controller.dart';
 import 'package:mechinetest/features/screens/home/widgets/category_container.dart';
 import 'package:mechinetest/features/screens/home/widgets/custom_promo_slidder.dart';
 import 'package:mechinetest/features/screens/home/widgets/home_action_button.dart';
@@ -15,6 +18,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productController = Get.put(HomeController());
+
     return Scaffold(
       //* App bar
       appBar: CAppbar(
@@ -64,9 +69,17 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: CSizes.spaceBtwItem),
 
               // Product Card
-              CGridLayout(
-                itemCount: 4,
-                itemBuilder: (_, index) => const ProductCard(),
+              Obx(
+                () {
+                  return productController.isLoading.value
+                      ? const CProductShimmer()
+                      : CGridLayout(
+                          itemCount: productController.localProductList.length,
+                          itemBuilder: (_, index) => ProductCard(
+                            product: productController.localProductList[index],
+                          ),
+                        );
+                },
               ),
               const SizedBox(height: 70)
             ],

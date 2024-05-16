@@ -1,11 +1,17 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mechinetest/commen/layout/grid_layout.dart';
 import 'package:mechinetest/commen/shapes/container/curved_container.dart';
 import 'package:mechinetest/commen/shapes/container/rounded_container.dart';
+import 'package:mechinetest/commen/shimmer/product_shimmer.dart';
 import 'package:mechinetest/commen/widget/appbar/custom_appbar.dart';
 import 'package:mechinetest/commen/widget/product/product_card.dart';
+import 'package:mechinetest/features/controllers/cart_controller.dart';
+import 'package:mechinetest/features/controllers/home_controller.dart';
+import 'package:mechinetest/features/models/product/product_list_model.dart';
 import 'package:mechinetest/features/screens/home/widgets/home_action_button.dart';
 import 'package:mechinetest/utils/constants/colors.dart';
 import 'package:mechinetest/utils/constants/sizes.dart';
@@ -16,6 +22,8 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = HomeController.instance;
+    final cartController = Get.put(CartController());
     return Scaffold(
       appBar: CAppbar(
         centerTitle: true,
@@ -38,9 +46,18 @@ class ProductScreen extends StatelessWidget {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  CGridLayout(
-                    itemCount: 10,
-                    itemBuilder: (_, index) => const ProductCard(),
+                  Obx(
+                    () {
+                      if (controller.isLoading.value) {
+                        return const CProductShimmer();
+                      }
+                      return CGridLayout(
+                        itemCount: controller.localProductList.length,
+                        itemBuilder: (_, index) => ProductCard(
+                          product: controller.localProductList[index],
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(
                     height: 150,
@@ -84,14 +101,19 @@ class ProductScreen extends StatelessWidget {
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.bold),
                                       ),
-                                      Text(
-                                        '\$45',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium!
-                                            .copyWith(
-                                                fontSize: 27,
-                                                fontWeight: FontWeight.bold),
+                                      Obx(
+                                        () {
+                                          return Text(
+                                            '\$${cartController.totalCartPrice.toString()}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineMedium!
+                                                .copyWith(
+                                                    fontSize: 27,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),

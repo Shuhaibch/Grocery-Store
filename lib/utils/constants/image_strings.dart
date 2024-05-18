@@ -19,4 +19,7 @@ class CIMages {
 
   //* Icons
   static const String iconWhatsapp = 'assets/images/icons/whatsapp.png';
+  static const String iconUser = 'assets/images/icons/user.png';
+  static const String iconCart = 'assets/images/icons/cart.png';
+
 }

@@ -1,5 +1,6 @@
+
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mechinetest/data/products/product_repository.dart';
 import 'package:mechinetest/features/models/product/product_list_model.dart';
 import 'package:mechinetest/utils/loader/loader.dart';
@@ -8,6 +9,7 @@ class HomeController extends GetxController {
   static HomeController get instance => Get.find();
   final RxBool isLoading = false.obs;
   final RxList<ProductList> productList = <ProductList>[].obs;
+  final RxList<ProductList> favoriteList = <ProductList>[].obs;
   final RxList<ProductList> localProductList = <ProductList>[].obs;
   final _productRepository = Get.put(ProductRepositoy());
   late final Box productBox = Hive.box('products');
@@ -31,8 +33,8 @@ class HomeController extends GetxController {
     }
   }
 
-  void addProductToHive() async {
-    await Hive.openBox('cartBox');
+  Future<void> addProductToHive() async {
+    await Hive.openBox('products');
     await getAllProducts();
     if (productBox.isEmpty) {
       productBox.clear();
@@ -40,13 +42,15 @@ class HomeController extends GetxController {
         await productBox.put(i, productList[i].toJson());
       }
     }
+    isLoading.value = false;
+    getProductsFromHive();
   }
 
   void getProductsFromHive() async {
-    await Hive.openBox('cartBox');
+    await Hive.openBox('products');
 
-    if (productBox.isEmpty) {
-      addProductToHive();
+    if (productBox.length == 0) {
+      await addProductToHive();
     }
     for (var i = 0; i < productBox.length; i++) {
       final productResp = await productBox.get(i);
@@ -54,16 +58,5 @@ class HomeController extends GetxController {
 
       localProductList.add(product);
     }
-    print(localProductList.length);
   }
 }
-  // final product = ProductList(
-        //     id: productResp['id'],
-        //     name: productResp['name'],
-        //     image: productResp['image'],
-        //     price: productResp['price'],
-        //     createdDate: productResp['createdDate'] ? DateFormat("2019-07-19 8:40:23"); DateTime.now(),
-        //     createdTime: productResp['createdTime'] ?? '',
-        //     modifiedDate: productResp['modifiedDate'] ?? DateTime.now(),
-        //     modifiedTime: productResp['modifiedTime'] ?? '',
-        //     flag: productResp['flag']);

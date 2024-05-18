@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:mechinetest/commen/shapes/container/circular_container.dart';
+import 'package:mechinetest/features/controllers/user_controller.dart';
 import 'package:mechinetest/utils/constants/colors.dart';
 import 'package:mechinetest/utils/constants/sizes.dart';
 import 'package:mechinetest/utils/device/device_util.dart';
@@ -22,6 +23,7 @@ class CCustomerSearchContainer extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return GestureDetector(
       onTap: onTap,
       child: Padding(
@@ -57,10 +59,20 @@ class CCustomerSearchContainer extends StatelessWidget {
                   const SizedBox(
                     width: CSizes.spaceBtwItem,
                   ),
-                  Text(
-                    text,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
+                  SizedBox(
+                    width: 200,
+                    child: TextFormField(
+                      onChanged: (value) => controller.clearSearch(),
+                      onEditingComplete: () => controller.searchUser(),
+                      controller: controller.searchCTRL,
+                      decoration: InputDecoration(
+                        hintText: text,
+                        
+                        isDense: true,
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  )
                 ],
               ),
               const Row(

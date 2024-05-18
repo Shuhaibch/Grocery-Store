@@ -6,15 +6,14 @@ import 'package:mechinetest/utils/constants/sizes.dart';
 import 'package:mechinetest/utils/device/device_util.dart';
 
 class CAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const CAppbar({
-    super.key,
-    this.title,
-    this.showBackArrow = false,
-    this.leadingIcon,
-    this.actions,
-    this.leadingOnPressed,
-    this.centerTitle=false
-  });
+  const CAppbar(
+      {super.key,
+      this.title,
+      this.showBackArrow = false,
+      this.leadingIcon,
+      this.actions,
+      this.leadingOnPressed,
+      this.centerTitle = false});
 
   final Widget? title;
   final bool showBackArrow;
@@ -33,7 +32,7 @@ class CAppbar extends StatelessWidget implements PreferredSizeWidget {
         leading: showBackArrow
             ? IconButton(
                 onPressed: () => Get.back(),
-                icon: const Icon(Iconsax.arrow_left, color: CColors.whiteColor))
+                icon: const Icon(Iconsax.arrow_left, color: CColors.themeColor))
             : leadingIcon != null
                 ? IconButton(
                     onPressed: leadingOnPressed, icon: Icon(leadingIcon))

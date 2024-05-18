@@ -3,13 +3,12 @@ import 'package:mechinetest/commen/images/c_rounded_images.dart';
 import 'package:mechinetest/commen/shapes/container/rounded_container.dart';
 import 'package:mechinetest/features/controllers/user_controller.dart';
 import 'package:mechinetest/features/models/user/all_user_model.dart';
-import 'package:mechinetest/features/screens/customers/widgets/icons_row.dart';
 import 'package:mechinetest/utils/constants/colors.dart';
 import 'package:mechinetest/utils/constants/image_strings.dart';
 import 'package:mechinetest/utils/helper/device_helper.dart';
 
-class CustomerTile extends StatelessWidget {
-  const CustomerTile({
+class SelectedCustomerTile extends StatelessWidget {
+  const SelectedCustomerTile({
     super.key,
     required this.user,
   });
@@ -18,7 +17,7 @@ class CustomerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final cntroller = UserController.instance;
     return CRoundedContainer(
-      height: CHelperFuntions.screenHeight() * .1,
+      height: CHelperFuntions.screenHeight() * .05,
       borderColor: cntroller.selectedUser.value == user
           ? CColors.themeColor
           : CColors.borderPrimaryColor,
@@ -104,7 +103,6 @@ class CustomerTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                Expanded(flex: 1, child: IconsRow()),
               ],
             ),
           ),

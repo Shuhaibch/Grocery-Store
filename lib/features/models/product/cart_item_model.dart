@@ -29,7 +29,16 @@ class CartItemModel {
       name: map['title'] as String,
       price: map['price'] as int,
       image: map['image'] != null ? map['image'] as String : null,
-      quantity: map['quantity'] as int,
+      quantity: map['quantity'] as int , 
+    );
+  }
+  factory CartItemModel.fromHiveJson( map) {
+    return CartItemModel(
+      productId: map['productId'] as int,
+      name: map['title'] as String,
+      price: map['price'] as int,
+      image: map['image'] != null ? map['image'] as String : null,
+      quantity: map['quantity'] as int , 
     );
   }
 }

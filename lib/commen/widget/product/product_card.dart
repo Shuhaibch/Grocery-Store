@@ -8,8 +8,10 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
     required this.product,
+    this.isHome = false,
   });
   final ProductList product;
+  final bool isHome;
   @override
   Widget build(BuildContext context) {
     return CRoundedContainer(
@@ -45,7 +47,7 @@ class ProductCard extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          ProductText(product: product)
+          ProductText(product: product, isHome: isHome)
         ],
       ),
     );

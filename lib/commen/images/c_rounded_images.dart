@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mechinetest/commen/shimmer/shimmer_effect.dart';
@@ -31,6 +33,7 @@ class CRoundedImage extends StatelessWidget {
   final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
+    log(imageUrl);
     return GestureDetector(
       onTap: onPressed,
       child: Container(
@@ -44,9 +47,16 @@ class CRoundedImage extends StatelessWidget {
                 ? BorderRadius.circular(borderRadius)
                 : BorderRadius.zero,
             child: isNetworkImage
-                ? CachedNetworkImage(imageUrl: imageUrl, fit: fit, 
-                progressIndicatorBuilder: (context, url, progress) => CShimmerEffect(width: width??double.infinity, height: height??158),
-                errorWidget: (context, url, error) => const Icon(Icons.error),)
+                ? CachedNetworkImage(
+                    imageUrl: imageUrl,
+                    fit: fit,
+                    progressIndicatorBuilder: (context, url, progress) =>
+                        CShimmerEffect(
+                            width: width ?? double.infinity,
+                            height: height ?? 158),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  )
                 : Image(
                     image: AssetImage(imageUrl),
                     fit: fit,

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -19,7 +18,7 @@ class CLoaders {
           margin: const EdgeInsets.symmetric(horizontal: 30),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            color:  CColors.greyColor.withOpacity(.9),
+            color: CColors.greyColor.withOpacity(.9),
           ),
           child: Center(
             child: Text(
@@ -39,7 +38,7 @@ class CLoaders {
       isDismissible: true,
       shouldIconPulse: true,
       colorText: CColors.whiteColor,
-      backgroundColor: CColors.primaryColor,
+      backgroundColor: CColors.themeColor,
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: duration),
       margin: const EdgeInsets.all(10),

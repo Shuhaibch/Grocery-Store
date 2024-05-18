@@ -15,8 +15,9 @@ class CProductShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return CGridLayout(
       itemCount: itemCount,
+      mainAxisExtent: 200,
       itemBuilder: (_, __) => SizedBox(
-        width: CHelperFuntions.screenWidth() * .4,
+        width: CHelperFuntions.screenWidth() * .35,
         height: CHelperFuntions.screenHeight() * .1,
         child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,9 +27,9 @@ class CProductShimmer extends StatelessWidget {
             SizedBox(height: CSizes.spaceBtwItem),
 
             // Text
-            CShimmerEffect(width: 160, height: 15),
-            SizedBox(height: CSizes.spaceBtwItem / 2),
-            CShimmerEffect(width: 110, height: 15),
+            // CShimmerEffect(width: 160, height: 15),
+            // SizedBox(height: CSizes.spaceBtwItem / 2),
+            // CShimmerEffect(width: 110, height: 15),
           ],
         ),
       ),

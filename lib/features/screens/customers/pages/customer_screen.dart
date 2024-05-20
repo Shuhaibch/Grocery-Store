@@ -26,66 +26,56 @@ class CustomerScreen extends StatelessWidget {
                 .headlineMedium!
                 .copyWith(color: const Color.fromARGB(255, 5, 70, 9))),
       ),
-      body: Stack(
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: CSizes.defaultSpace),
-            child: CustomScrollView(
-              slivers: [
-                // search box
-                SliverToBoxAdapter(
-                  child: CCustomerSearchContainer(
-                    text: 'Search Customer',
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 15,
-                    ),
-                    onTap: () {},
-                  ),
-                ),
-                Obx(
-                  () {
-                    if (userController.isLoading.value) {
-                      return const CUserShimmer();
-                    }
-                    return userController.searchList.isNotEmpty
-                        ? SliverList(
-                            delegate:
-                                SliverChildBuilderDelegate((context, index) {
-                              final user = userController.searchList[index];
-                              return InkWell(
-                                onTap: () =>
-                                    userController.selectCurrentUser(user),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 5.0),
-                                  child: CustomerTile(user: user),
-                                ),
-                              );
-                            }, childCount: userController.searchList.length),
-                          )
-                        : SliverList(
-                            delegate:
-                                SliverChildBuilderDelegate((context, index) {
-                              final user = userController.allUserList[index];
-                              return InkWell(
-                                onTap: () =>
-                                    userController.selectCurrentUser(user),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 5.0),
-                                  child: CustomerTile(user: user),
-                                ),
-                              );
-                            }, childCount: userController.allUserList.length),
-                          );
-                  },
-                ),
-                const SliverToBoxAdapter(child: SizedBox(height: 100)),
-              ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: CSizes.defaultSpace),
+        child: CustomScrollView(
+          slivers: [
+            // search box
+            SliverToBoxAdapter(
+              child: CCustomerSearchContainer(
+                text: 'Search Customer',
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                onTap: () {},
+              ),
             ),
-          ),
-        ],
+            Obx(
+              () {
+                if (userController.isLoading.value) {
+                  return SliverToBoxAdapter(child: const CUserShimmer());
+                }
+                return userController.searchList.isNotEmpty
+                    ? SliverList(
+                        delegate: SliverChildBuilderDelegate((context, index) {
+                          final user = userController.searchList[index];
+                          return InkWell(
+                            onTap: () => userController.selectCurrentUser(user),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              child: CustomerTile(user: user),
+                            ),
+                          );
+                        }, childCount: userController.searchList.length),
+                      )
+                    : SliverList(
+                        delegate: SliverChildBuilderDelegate((context, index) {
+                          final user = userController.allUserList[index];
+                          return InkWell(
+                            onTap: () => userController.selectCurrentUser(user),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              child: CustomerTile(user: user),
+                            ),
+                          );
+                        }, childCount: userController.allUserList.length),
+                      );
+              },
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 100)),
+          ],
+        ),
       ),
     );
   }

@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
         title: 'Technouroues',
-        themeMode: ThemeMode.system,
+        // themeMode: ThemeMode.system,
         theme: CAppTheme.lightTheme,
-        darkTheme: CAppTheme.darkTheme,
+        // darkTheme: CAppTheme.darkTheme,
         initialBinding: GeneralBindings(),
         // getPages: AppRoutes.pages,
         home: const NavigationMenu() );

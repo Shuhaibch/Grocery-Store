@@ -60,14 +60,13 @@ class CCustomerSearchContainer extends StatelessWidget {
                     width: CSizes.spaceBtwItem,
                   ),
                   SizedBox(
-                    width: 200,
+                    width: 130,
                     child: TextFormField(
                       onChanged: (value) => controller.clearSearch(),
                       onEditingComplete: () => controller.searchUser(),
                       controller: controller.searchCTRL,
                       decoration: InputDecoration(
                         hintText: text,
-                        
                         isDense: true,
                         border: InputBorder.none,
                       ),

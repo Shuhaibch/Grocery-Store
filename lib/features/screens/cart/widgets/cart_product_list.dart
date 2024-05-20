@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:mechinetest/commen/images/c_rounded_images.dart';
 import 'package:mechinetest/commen/shapes/container/rounded_container.dart';
 import 'package:mechinetest/features/controllers/cart_controller.dart';
 import 'package:mechinetest/features/models/product/cart_item_model.dart';
@@ -44,48 +45,36 @@ class CartProductListTile extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Flexible(
-                    flex: 1,
-                    child: SizedBox(
-                      width: CHelperFuntions.screenWidth() * .2,
-                    ),
+                  SizedBox(
+                    width: CHelperFuntions.screenWidth() * .25,
                   ),
-                  Flexible(
-                    flex: 1,
-                    child: CartItemText(
-                      product: product,
-                    ),
+                  CartItemText(
+                    product: product,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Flexible(
-                      flex: 1,
-                      child: AddRemoveButton(
-                          cartController: cartController, product: product),
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                    child: AddRemoveButton(
+                        cartController: cartController, product: product),
                   ),
-                  Flexible(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: SizedBox(
-                        width: 70,
-                        child: Obx(
-                          () {
-                            final productQuantityInCart = cartController
-                                .getProductQuantityinCart(product.productId);
-                            return Text(
-                              '\$${productQuantityInCart * product.price}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium!
-                                  .copyWith(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            );
-                          },
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: SizedBox(
+                      width: 70,
+                      child: Obx(
+                        () {
+                          final productQuantityInCart = cartController
+                              .getProductQuantityinCart(product.productId);
+                          return Text(
+                            '\$${productQuantityInCart * product.price}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -98,10 +87,11 @@ class CartProductListTile extends StatelessWidget {
           Positioned(
             top: 0,
             left: 20,
-            child: Image.network(
+            child: CRoundedImage(
+              isNetworkImage: true,
               width: CHelperFuntions.screenWidth() * .18,
               height: CHelperFuntions.screenHeight() * .07,
-              'http://143.198.61.94:8000${product.image}',
+              imageUrl: 'http://143.198.61.94:8000${product.image}',
               fit: BoxFit.cover,
             ),
           ),

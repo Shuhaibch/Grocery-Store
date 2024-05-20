@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mechinetest/commen/images/c_rounded_images.dart';
 import 'package:mechinetest/commen/shapes/container/rounded_container.dart';
-import 'package:mechinetest/features/controllers/user_controller.dart';
 import 'package:mechinetest/features/models/user/all_user_model.dart';
 import 'package:mechinetest/features/screens/customers/widgets/icons_row.dart';
-import 'package:mechinetest/utils/constants/colors.dart';
 import 'package:mechinetest/utils/constants/image_strings.dart';
 import 'package:mechinetest/utils/helper/device_helper.dart';
 
@@ -16,12 +14,8 @@ class CustomerTile extends StatelessWidget {
   final AllUser user;
   @override
   Widget build(BuildContext context) {
-    final cntroller = UserController.instance;
     return CRoundedContainer(
       height: CHelperFuntions.screenHeight() * .1,
-      borderColor: cntroller.selectedUser.value == user
-          ? CColors.themeColor
-          : CColors.borderPrimaryColor,
       child: Row(
         children: [
           //* image
@@ -72,36 +66,31 @@ class CustomerTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Expanded(
-                  flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Flexible(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            user.name,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.headlineSmall,
-                            softWrap: true,
-                          ),
-                          Text(
-                            'ID: ${user.id}',
-                            style: Theme.of(context).textTheme.labelMedium,
-                            softWrap: true,
-                          ),
-                          Text(
-                            '${user.city},${user.country} ',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            softWrap: true,
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                        ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        user.name,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                        softWrap: true,
                       ),
-                    ),
+                      Text(
+                        'ID: ${user.id}',
+                        style: Theme.of(context).textTheme.labelMedium,
+                        softWrap: true,
+                      ),
+                      Text(
+                        '${user.city},${user.country} ',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(flex: 1, child: IconsRow()),

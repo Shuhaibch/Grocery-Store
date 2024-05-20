@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mechinetest/commen/images/c_rounded_images.dart';
 import 'package:mechinetest/commen/shapes/container/rounded_container.dart';
 import 'package:mechinetest/commen/text/product_card_text.dart';
 import 'package:mechinetest/features/models/product/product_list_model.dart';
@@ -40,10 +41,11 @@ class ProductCard extends StatelessWidget {
           //* image
           Align(
             alignment: Alignment.topCenter,
-            child: Image.network(
+            child: CRoundedImage(
+              isNetworkImage: true,
+              imageUrl: 'http://143.198.61.94:8000${product.image}',
               // width: CHelperFuntions.screenWidth() * .2,
               height: CHelperFuntions.screenHeight() * .11,
-              'http://143.198.61.94:8000${product.image}',
               fit: BoxFit.cover,
             ),
           ),
